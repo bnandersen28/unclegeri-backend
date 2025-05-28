@@ -5,6 +5,7 @@ const mysql = require('mysql2')
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const db = require('./db'); // or wherever your db.js is
 
 const app = express();
 const PORT = 3000;
@@ -15,24 +16,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
-let db;
-
-// MySQL connection
-(async() => {
-    try{
-    db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '', // or your actual MySQL password
-    database: 'driving_school'
-  });
-  
-  console.log('Connected to MySQL');
-} catch (error) {
-    console.error('Error connecting to MySQL:', error);
-}
-  })();
 
 //Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -118,7 +101,7 @@ app.post('/register', async (req, res) => {
         ];
 
         
-            const [result] = await db.promise().execute(query, values);
+            const [result] = await db.execute(query, values);
             console.log('SQL success:', result);
             res.status(201).json({ message: 'Registration successful', id: result.insertId });
         } catch (err) {
@@ -128,6 +111,17 @@ app.post('/register', async (req, res) => {
        
 
     });
+
+    // GET all registrations
+app.get('/api/registrations', async (req, res) => {
+    try {
+      const [rows] = await db.execute('SELECT * FROM registrations');
+      res.json(rows);
+    } catch (err) {
+      console.error('Error fetching registrations:', err);
+      res.status(500).json({ error: 'Failed to fetch registrations' });
+    }
+  });
 
 
 //Start the server
