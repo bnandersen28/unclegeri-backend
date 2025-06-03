@@ -49,18 +49,16 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
-  secret: 'fj3l2k1m9q8zvbn$#@!x23df98LKJD(*&^%$#',
-  resave: false,
-  saveUninitialized: false
-}));
 
-//check if server is healthy
-app.get('/health', (req, res) => {
-  res.send('Server is healthy!');
-});
+// app.use(session({
+//   secret: 'fj3l2k1m9q8zvbn$#@!x23df98LKJD(*&^%$#',
+//   resave: false,
+//   saveUninitialized: false
+// }));
+
+
 
 // Login Route
 app.post('/login', (req, res) => {
@@ -83,6 +81,15 @@ app.get('/admin.html', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
+app.get('/db-health', async (req, res) => {
+  try {
+    await db.execute('SELECT 1');
+    res.status(200).send('Database connection is healthy');
+  } catch (err) {
+    console.error('Database connection error:', err);
+    res.status(500).send('Database connection failed');
+  }
+});
 
 
 // Register Student
