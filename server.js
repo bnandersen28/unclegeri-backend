@@ -6,9 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const db = require('./db.js');
-console.log('Database Connection:', db);
-const https = require('https');
-const fs = require('fs');
+
 
 const { client: square, ApiError } = require('./routes/square');
 const logger = require('./routes/logger');
@@ -20,15 +18,14 @@ const retry = require('async-retry');
 const { Console } = require('console');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-const options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
-};
+
 
 app.use(cors({
-  origin: 'https://localhost:3000',
+  origin: ['https://localhost:3000',
+    'https://unclegerisdriving.netlify.app',
+  ],
   methods: ['GET,POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -216,6 +213,6 @@ app.post('/card', async (req, res) => {
 });
 
 // Start HTTPS Server
-https.createServer(options, app).listen(PORT, () => {
-  console.log(`Server running at https://localhost:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on https://localhost:${PORT}`);
 });
