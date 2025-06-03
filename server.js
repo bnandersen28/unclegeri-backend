@@ -22,14 +22,7 @@ const PORT = process.env.PORT || 3001;
 
 
 
-app.use(cors({
-  origin: ['https://localhost:3000',
-    'https://unclegerisdriving.netlify.app',
-  ],
-  methods: ['GET,POST'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
+app.use(cors());
 
 app.use(express.json());
 app.use(bodyParser.json());
