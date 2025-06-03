@@ -23,7 +23,11 @@ const { Console } = require('console');
 
 
 const PORT = process.env.PORT || 3001;
-
+//log incoming requests
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.url}`);
+  next();
+});
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -35,6 +39,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+//check if server is healthy
+app.get('/health', (req, res) => {
+  res.send('Server is healthy!');
+});
 
 // Login Route
 app.post('/login', (req, res) => {
