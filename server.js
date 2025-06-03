@@ -57,10 +57,7 @@ app.get('/admin.html', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
-// Default Page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+
 
 // Register Student
 app.post('/register', async (req, res) => {
