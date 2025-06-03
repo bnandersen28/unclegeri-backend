@@ -9,7 +9,9 @@ const db = require('./db.js');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({origin: 'https://unclegerisdriving.netlify.app',
+  methods: ['GET', 'POST'],
+  credentials: true}));
 const { client: square, ApiError } = require('./routes/square');
 const logger = require('./routes/logger');
 const {
@@ -21,9 +23,6 @@ const { Console } = require('console');
 
 
 const PORT = process.env.PORT || 3001;
-
-
-
 
 
 app.use(express.json());
