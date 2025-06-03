@@ -7,7 +7,9 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const db = require('./db.js');
 
+const app = express();
 
+app.use(cors());
 const { client: square, ApiError } = require('./routes/square');
 const logger = require('./routes/logger');
 const {
@@ -17,12 +19,12 @@ const {
 const retry = require('async-retry');
 const { Console } = require('console');
 
-const app = express();
+
 const PORT = process.env.PORT || 3001;
 
 
 
-app.use(cors());
+
 
 app.use(express.json());
 app.use(bodyParser.json());
