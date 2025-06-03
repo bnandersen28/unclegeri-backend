@@ -22,7 +22,14 @@ const retry = require('async-retry');
 const { Console } = require('console');
 
 
+
 const PORT = process.env.PORT || 3001;
+
+app.get('/', (req, res) => {
+  res.status(200).send('OK');
+});
+
+
 //log incoming requests
 app.use((req, res, next) => {
   console.log(`[${req.method}] ${req.url}`);
@@ -213,7 +220,7 @@ app.post('/card', async (req, res) => {
   }
 });
 
-// Start HTTPS Server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
