@@ -9,7 +9,7 @@ const db = require('./db.js');
 
 const app = express();
 
-app.use(cors({origin: 'https://unclegerisdriving.netlify.app',
+app.use(cors({origin: '*',
   methods: ['GET', 'POST'],
   credentials: true}));
 const { client: square, ApiError } = require('./routes/square');
@@ -26,7 +26,17 @@ const { Console } = require('console');
 const PORT = process.env.PORT || 3001;
 
 app.get('/', (req, res) => {
-  res.status(200).send('OK');
+  res.status(200).send(`
+    <html>
+      <head>
+        <title>Backend Status</title>
+      </head>
+      <body>
+        <h1>Backend is running</h1>
+        <p>Welcome to Uncle Geri's Driving School backend!</p>
+      </body>
+    </html>
+  `);
 });
 
 
@@ -221,6 +231,6 @@ app.post('/card', async (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port http://0.0.0.0:${PORT}`);
 });
 
