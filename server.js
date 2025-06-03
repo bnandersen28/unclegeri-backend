@@ -64,6 +64,7 @@ app.get('/', (req, res) => {
 
 // Register Student
 app.post('/register', async (req, res) => {
+  console.log('Received registration request:', req.body);
   try {
     const {
       course, studentName, parentName, phone,
