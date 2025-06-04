@@ -52,11 +52,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, 'public')));
 
 
-// app.use(session({
-//   secret: 'fj3l2k1m9q8zvbn$#@!x23df98LKJD(*&^%$#',
-//   resave: false,
-//   saveUninitialized: false
-// }));
+app.use(session({
+  secret: 'fj3l2k1m9q8zvbn$#@!x23df98LKJD(*&^%$#',
+  resave: false,
+  saveUninitialized: false
+}));
 
 
 
