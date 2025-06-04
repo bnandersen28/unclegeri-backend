@@ -7,6 +7,7 @@ const pool = mysql.createPool({
   database: 'unclegeri-db',
   port: 3306,
   waitForConnections: true,
+  connectionLimit: 10,
 
 });
 

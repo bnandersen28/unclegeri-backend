@@ -83,7 +83,8 @@ app.get('/admin.html', isAuthenticated, (req, res) => {
 
 app.get('/db-health', async (req, res) => {
   try {
-    await db.execute('SELECT 1');
+    const [result] = await db.execute('SELECT 1');
+    console.log('DB health result:', result);
     res.status(200).send('Database connection is healthy');
   } catch (err) {
     console.error('Database connection error:', err);
