@@ -21,5 +21,5 @@ logger.debug('Parsed configuration:', parsed);
 // export secrets stored in .env.production or .env.sandbox (based on .env.example)
 module.exports = {
   ...parsed,
-  isProduction,
+  isProduction: false,
 };
