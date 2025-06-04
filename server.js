@@ -9,7 +9,7 @@ const db = require('./db.js');
 
 const app = express();
 
-app.use(cors({origin: '*',
+app.use(cors({origin: 'https://unclegerisdriving.netlify.app',
   methods: ['GET', 'POST'],
   credentials: true}));
 const { client: square, ApiError } = require('./routes/square');
