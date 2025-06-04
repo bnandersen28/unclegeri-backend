@@ -6,6 +6,7 @@ console.log('Initializing Square Client...');
 console.log('SQUARE_ACCESS_TOKEN exists:', !!process.env.SQUARE_ACCESS_TOKEN);
 console.log('First 5 characters of token:', process.env.SQUARE_ACCESS_TOKEN?.substring(0, 5));
 console.log('Using environment:', process.env.NODE_ENV);
+console.log('Production variable:', isProduction);
 
 const client = new Client({
   environment: isProduction ? Environment.Production : Environment.Sandbox,
