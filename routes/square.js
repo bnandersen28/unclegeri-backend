@@ -9,7 +9,7 @@ console.log('Using environment:', process.env.NODE_ENV);
 console.log('Production variable:', isProduction);
 
 const client = new Client({
-  environment: isProduction ? Environment.Production : Environment.Sandbox,
+  environment: Environment.Sandbox,
   accessToken: SQUARE_ACCESS_TOKEN,
 });
 
