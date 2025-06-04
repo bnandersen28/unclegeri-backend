@@ -1,10 +1,13 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  host: 'localhost',
+  host: 'unclegeri-db.c2vos4siyf8o.us-east-1.rds.amazonaws.com',
   user: 'root',
-  password: '',
-  database: 'driving_school',
+  password: process.env.DB_PASSWORD || 'UncleGeri$!', // Use environment variable or default password
+  database: 'unclegeri-db',
+  port: 3306,
+  waitForConnections: true,
+
 });
 
 module.exports = pool;
