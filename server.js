@@ -8,7 +8,7 @@ const session = require('express-session');
 const db = require('./db.js');
 
 const app = express();
-const isProduction = false;
+
 
 app.use(cors({origin: 'https://unclegerisdriving.netlify.app',
   methods: ['GET', 'POST'],
