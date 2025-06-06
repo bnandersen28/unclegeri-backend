@@ -104,7 +104,7 @@ app.post('/register', async (req, res) => {
       start_date, acknowledged_policies
     } = req.body;
 
-    if (!course || !studentName || !acknowledged_policies|| !phone  || !email || !address)  {
+    if (!course || !studentName || !acknowledged_policies|| !phone  || !email || !home_address)  {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
