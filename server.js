@@ -100,22 +100,25 @@ app.post('/register', async (req, res) => {
   try {
     const {
       course, studentName, parentName, phone,
-      parentPhone, email, parentEmail, address, permitNumber
+      parentPhone, email, parentEmail, address, permitNumber, 
+      startDate, acknowledgedPolicies
     } = req.body;
 
-    if (!course || !studentName || !parentName || !phone || !parentPhone || !email || !parentEmail || !address || !permitNumber) {
+    if (!course || !studentName || !acknowledgedPolicies|| !phone  || !email || !address)  {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
     const query = `
       INSERT INTO registrations (
         course, student_name, parent_name, phone_number,
-        parent_phone, email, parent_email, address, permit_number
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        parent_phone, email, parent_email, address, permit_number,
+         start_date, acknowledged_policies
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const values = [
       course, studentName, parentName, phone,
-      parentPhone, email, parentEmail, address, permitNumber
+      parentPhone, email, parentEmail, address, permitNumber, 
+      state_date ||null, acknowledgedPolicies ? 1 : 0
     ];
 
     const [result] = await db.execute(query, values);
@@ -156,7 +159,7 @@ app.post('/payment', async (req, res) => {
           locationId: payload.locationId,
           sourceId: payload.sourceId,
           amountMoney: {
-            amount: '100', // In cents
+            amount: Math.round(payload.amount*100), // In cents
             currency: 'USD',
           },
         };

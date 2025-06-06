@@ -4,6 +4,7 @@ const logger = require('./logger');
 
 // package.json sets NODE_ENV in its scripts
 const isProduction = process.env.NODE_ENV === 'sandbox';
+console.log('Environment:', isProduction);
 
 // load configuration based on environment
 const { error, parsed } = config({
