@@ -8,11 +8,11 @@ const session = require('express-session');
 const db = require('./db.js');
 
 const app = express();
-
+app.options('*', cors());
 
 app.use(cors({origin: 'https://unclegerisdriving.netlify.app',
   methods: ['GET', 'POST'],
-  credentials: true}));
+}));
 const { client: square, ApiError } = require('./routes/square');
 const logger = require('./routes/logger');
 const {
