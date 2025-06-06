@@ -101,7 +101,7 @@ app.post('/register', async (req, res) => {
     const {
       course, studentName, parentName, phone,
       parentPhone, email, parentEmail, address, permitNumber, 
-      startDate, acknowledgedPolicies
+      start_date, acknowledged_policies
     } = req.body;
 
     if (!course || !studentName || !acknowledgedPolicies|| !phone  || !email || !address)  {
@@ -118,7 +118,7 @@ app.post('/register', async (req, res) => {
     const values = [
       course, studentName, parentName, phone,
       parentPhone, email, parentEmail, address, permitNumber, 
-      state_date ||null, acknowledgedPolicies ? 1 : 0
+      state_date ||null, acknowledged_policies ? 1 : 0
     ];
 
     const [result] = await db.execute(query, values);
