@@ -100,7 +100,7 @@ app.post('/register', async (req, res) => {
   try {
     const {
       course, studentName, parentName, phone,
-      parentPhone, email, parentEmail, address, permitNumber, 
+      parentPhone, email, parentEmail, home_address, permitNumber, 
       start_date, acknowledged_policies
     } = req.body;
 
@@ -111,13 +111,13 @@ app.post('/register', async (req, res) => {
     const query = `
       INSERT INTO registrations (
         course, student_name, parent_name, phone,
-        parent_phone, email, parent_email, address, permit_number,
+        parent_phone, email, parent_email, home_address, permit_number,
          start_date, acknowledged_policies
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const values = [
       course, studentName, parentName, phone,
-      parentPhone, email, parentEmail, address, permitNumber, 
+      parentPhone, email, parentEmail, home_address, permitNumber, 
       start_date ||null, acknowledged_policies ? 1 : 0
     ];
 
