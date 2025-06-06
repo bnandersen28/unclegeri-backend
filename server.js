@@ -130,6 +130,36 @@ app.post('/register', async (req, res) => {
   }
 });
 
+
+//Update payment method
+app.post('/payment-method', async (req, res) => {
+  console.log('Received payment method request:', req.body);
+
+  try{
+    const {id, payment_method} = req.body;
+
+    if (!id || !payment_method) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const query = `
+      UPDATE registrations 
+      SET payment_method = ? 
+      WHERE id = ?`;
+
+    const values = [payment_method, id];
+    const [result] = await db.execute(query, values);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Registration not found' });
+    }
+    res.status(200).json({ message: 'Payment method updated successfully' });
+  } catch (err) {
+    console.error('SQL error:', err);
+    res.status(500).json({ message: 'Error updating payment method' });
+  }
+});
+
 // Fetch All Registrations
 app.get('/api/registrations', async (req, res) => {
   try {
