@@ -299,6 +299,17 @@ app.post('/send-message', async (req, res) => {
   }
 });
 
+//Function to fetch all messages
+app.get('/messages', async (req, res) => {
+  try {
+    const [rows] = await db.execute('SELECT * FROM messages');
+    res.json(rows);
+  } catch (err) {
+    console.error('Error fetching messages:', err);
+    res.status(500).json({ error: 'Failed to fetch messages' });
+  }
+});
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port http://0.0.0.0:${PORT}`);
 });
