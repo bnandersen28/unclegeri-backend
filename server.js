@@ -190,7 +190,7 @@ app.post('/payment', async (req, res) => {
           locationId: payload.locationId,
           sourceId: payload.sourceId,
           amountMoney: {
-            amount: Math.round(payload.amount*100), // In cents
+            amount: BigInt(payload.amount), // In cents
             currency: 'USD',
           },
         };
