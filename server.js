@@ -273,6 +273,32 @@ app.post('/card', async (req, res) => {
   }
 });
 
+
+//Take name, email, and message from contact form
+//and add to messages table
+app.post('/send-message', async (req, res) => {
+  console.log('Received contact form message:', req.body);
+  try {
+    const { name, email, message } = req.body;
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const query = `
+      INSERT INTO messages (name, email, message) 
+      VALUES (?, ?, ?)`;
+
+    const values = [name, email, message];
+    const [result] = await db.execute(query, values);
+
+    res.status(201).json({ message: 'Message sent successfully', id: result.insertId });
+  } catch (err) {
+    console.error('SQL error:', err);
+    res.status(500).json({ message: 'Error sending message' });
+  }
+});
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port http://0.0.0.0:${PORT}`);
 });
