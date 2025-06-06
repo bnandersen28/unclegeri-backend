@@ -110,7 +110,7 @@ app.post('/register', async (req, res) => {
 
     const query = `
       INSERT INTO registrations (
-        course, student_name, parent_name, phone_number,
+        course, student_name, parent_name, phone,
         parent_phone, email, parent_email, address, permit_number,
          start_date, acknowledged_policies
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
