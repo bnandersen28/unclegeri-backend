@@ -303,6 +303,7 @@ app.post('/send-message', async (req, res) => {
 app.get('/messages', async (req, res) => {
   try {
     const [rows] = await db.execute('SELECT * FROM messages');
+    console.log('Fetched rows:', rows);
     res.json(rows);
   } catch (err) {
     console.error('Error fetching messages:', err);
